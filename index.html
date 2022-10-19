@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Semantic Money - Researching Future of Money</title>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+            crossorigin="anonymous">
+        </script>
+        <script
+            src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+            integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+            crossorigin="anonymous">
+        </script>
+        <script>
+            function openHome() {
+                $("#main").switchClass("tab tab-about tab-library", "home", 100, "easeInQuad");
+            }
+
+            function openAboutTab() {
+                $("#main").switchClass("home tab-library", "tab-about tab", 100, "easeInQuad");
+                //$("#main").removeClass().addClass("tab-about", 300);
+            }
+
+            function openLibraryTab() {
+                $("#main").switchClass("home tab-about", "tab-library tab", 100, "easeInQuad");
+            }
+
+            $(window).on("load", function() {
+                let hash;
+                if (location.hash && location.hash.length) {
+                    hash = decodeURIComponent(location.hash.substr(1));
+                }
+                if (hash == "about") $("#main").addClass("tab-about tab");
+                else if (hash == "library") $("#main").addClass("tab-library tab");
+                else {
+                    $("#main").addClass("home");
+                    location.hash = "#";
+                }
+                $("#main").show();
+            });
+        </script>
+        <style>
+            /**
+             * Dark Mode Support
+             */
+            @media (prefers-color-scheme: dark) {
+                html {
+                    filter: invert(100%);
+                }
+
+                /* double apply invert filter to cancel out effect on images */
+                img, .brooks:before  {
+                    filter: invert(100%);
+                }
+            }
+
+            /**
+             * Utils
+             */
+            .brooks {
+                position: relative;
+                font-family: serif;
+                font-style: italic;
+                line-height: 1.2em;
+            }
+            .brooks:before {
+                content: "\201C";
+                position: absolute;
+                top: 0.1rem;
+                left: -0.7rem;
+                color: #ef131d;
+                font-size: 1.5rem;
+                z-index: -1;
+            }
+
+            body {
+            }
+
+            #main {
+                display: flex;
+                flex-direction: column;
+            }
+
+            footer {
+                display: block;
+                margin: auto;
+                padding-bottom: 5px;
+                height: 2.5%;
+                font-size: 2vh;
+                position: fixed;
+                bottom: 0;
+                right: 0;
+            }
+
+            footer img {
+                filter: invert(100%);
+                height: 100%;
+            }
+
+            /**
+             * Home Page
+             */
+            #logo a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .home #div-logo-links {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .home #div-logo-links > * {
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                margin-bottom: 1vh;
+            }
+            .home #logo {
+                height: 60%;
+                font-size: 20vh;
+            }
+            .home #title {
+                height: 10%;
+                font-size: 6vw;
+            }
+            .home #subtitle {
+                height: 8%;
+                font-size: 3vw;
+            }
+            .home #links {
+                height: 8%;
+                font-size: 3vh;
+            }
+
+            /**
+             * Tabs
+             */
+            .tab {
+                display: flex;
+                flex-wrap: nowrap;
+                max-width: 720px;
+                margin: auto;
+                justify-content: center;
+                font-size: 0.9rem;
+            }
+            .tab #div-logo-links {
+                display: flex;
+                flex-direction: row;
+            }
+            .tab #div-logo-links > * {
+                display: flex;
+                text-align: center;
+            }
+            .tab #logo {
+                margin: auto;
+                flex: 10%;
+                font-size: 3vh;
+            }
+            .tab #links {
+                margin: auto;
+                flex: 60%;
+                font-size: 3vh;
+            }
+            .tab #links a {
+                display: inline-block;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+            .tab #title { display: none; }
+            .tab #subtitle { display: none; }
+
+            .tab-about #about-link {
+                font-size: 3.5vh;
+                font-weight: bold;
+            }
+            .tab-library #library-link {
+                font-size: 3.5vh;
+                font-weight: bold;
+            }
+
+            #content-about { display: none; }
+            #content-library { display: none; }
+
+            .tab-about #content-about {
+                display: flex;
+                flex-direction: column;
+            }
+            .tab-library #content-library {
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main" style="display: none;">
+            <div id="div-logo-links">
+                <span id="logo"><a href="#" onclick="openHome()">$$[\![\mathcal{M}]\!]$$</a></span><br/>
+                <span id="links">
+                    <a href="#about" id="about-link" onclick="openAboutTab()">About</a> &nbsp|&nbsp
+                    <a href="#library" id="library-link" onclick="openLibraryTab()">Library</a>
+                </span>
+                <span id="title">Semantic Money</span><br/>
+                <span id="subtitle">Researching Future of Money</span><br/>
+            </div>
+            <div id="div-content">
+                <div id="content-about">
+                    <blockquote class="brooks">
+                        Payment systems in information age are still largely modeled after
+                        their analog predecessors. We can modernize it.
+                    </blockquote>
+                    <div>
+                        <h2>Vision</h2>
+                        <p>
+                            The vision for Semantic Money is to be a leading group in the exploration of modern payment
+                            system, primarily in the context of fintech blockchain space. We are born out of industrial
+                            experience which seeded the idea, and are looking for a balanced confluence between
+                            researching a stronger foundation for modern payment systems and its practical
+                            implementations in the fintech blockchain space.
+                        </p>
+                        <h2>Structure</h2>
+                        <p>
+                            Semantic Money group is currently being formed
+                            by <a href="https://www.linkedin.com/in/miaozc/" target="_blank" rel="noopener">Miao,
+                            ZhiCheng</a>, CTO in Superfluid Finance.
+                        </p>
+                        <p>
+                            We are looking for able and passionate frontier explorers to join the journey. While we
+                            don't have job posts public yet, but if the areas of interests of this group intersect with
+                            yours, please send your CV
+                            to <a href="mailto:jobs@superfluid.finance">jobs@superfluid.finance</a>!
+                        </p>
+                        <h2>Areas of Interest</h2>
+                        <ul>
+                            <li>Software Architecture</li>
+                            <ul>
+                                <li>System Specification in Denotational Semantics</li>
+                                <li>Functional Reactive Programming</li>
+                                <li>Distributed Systems</li>
+                            </ul>
+                            <li>Blockchain Technology</li>
+                            <ul>
+                                <li>Building on Layer 1 Chains (EVM, Solana, Fuel, Cardano, etc.)</li>
+                                <li>Building App-Chains (Cosmos, Polkadot, etc.)</li>
+                            </ul>
+                            <li>Formal Methods</li>
+                            <ul>
+                                <li>Dependently Typed Languages, and Type-Driven Development</li>
+                                <li>Formal Verification</li>
+                            </ul>
+                            <li>Cryptography</li>
+                            <ul>
+                                <li>Zero Knowledge Proofs</li>
+                                <li>Fully Homomorphic Encryption</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div id="content-library">
+                    <div id="library-item">
+                        <h2>(Yellowpaper 1) Denotational Semantics of General Payment Primitives, and Its Payment
+                    System</h2>
+                        <div class="paper-tags-group">
+                            <label><strong>Tags:</strong></label>
+                            <span class="paper-tag">YELLOWPAPER</span>,
+                            <span class="paper-tag">DENOTATIONAL SEMANTICS</span>
+                        </div>
+                        <div class="paper-abstract">
+                            <h3>Abstract:</h3>
+                            <p>
+                                Payment systems in information age are still largely modeled after their analog
+                                predecessors. While electronic money payment systems do utilize computing technology and
+                                Internet, this paper presents a case that a true modernization can be reached by (a)
+                                making payments happening continuously over time, (b) involving more than two parties in
+                                a payment if necessary, (c) having compositional financial contracts.
+                            </p>
+                            <p>
+                                This paper first explores the foundation of modern payment system, which consists of a
+                                money distribution model, payment primitives, payment execution systems of financial
+                                contracts and different forms of money mediums. Then the paper uses \textit{denotational
+                                semantics} to formally define payment primitives for modern payment system. Lastly, this
+                                paper also includes an overview of \textit{Superfluid protocol}, a reference
+                                implementation of the payment primitives and its payment system.
+                            </p>
+                        </div>
+                        <div class="paper-download">
+                            <label><strong>Download:</strong></label>
+                            <a href="assets/semantic-money-yellowpaper1.pdf">PDF</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            A
+            <a href="https://www.superfluid.finance/" target="_blank" rel="noopener">Superfluid Finance</a>
+            initiative
+
+            <a href="https://www.superfluid.finance/" target="_blank" rel="noopener">
+                <img src="superfluid-logo.png" alt=""/>
+            </a>
+        </footer>
+    </body>
+</html>
